@@ -2,6 +2,7 @@ import { View, Text, Image } from 'react-native'
 import React, { useState } from 'react'
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import Features from '../components/features';
 
 export default function HomeScreen() {
     const [messages, setMessages] = useState([]);
