@@ -7,6 +7,17 @@ import { dummyMessages } from '../constants';
 
 export default function HomeScreen() {
     const [messages, setMessages] = useState(dummyMessages);
+    const [recording, setRecording] = useState(false);
+    const [speaking, setSpeaking ] = useState(false);
+
+    const clear = ()=> {
+        setMessages([]);
+    }
+
+    const stop = ()=> {
+        setSpeaking(false);
+    }
+
   return (
     <View className="flex-1 bg-white">
         <SafeAreaView className="flex-1 flex mx-5">
@@ -83,7 +94,53 @@ export default function HomeScreen() {
                     <Features />
                 )
             }
+            {/*recording, clear and stop button*/}
+            <View className="flex justify-center items-center">
+                {
+                    recording?(
+                        <TouchableOpacity>
+                            <Image
+                                className="rounded-full"
+                                source={require('../../assets/img/voiceLoading.gif')}
+                                style={{width:hp(10), height:hp(10)}}
+                            />
+                        </TouchableOpacity>
+                    ):(
+                        <TouchableOpacity>
+                            <Image
+                                className="rounded-full"
+                                source={require('../../assets/img/recordingIcon.png')}
+                                style={{width:hp(10), height:hp(10)}}
+                            />
+                        </TouchableOpacity>
+                    )
+                }
 
+                {
+                    messages.length>0 && (
+                        <TouchableOpacity
+                            onPress={clear}
+                            className="bg-neutral-400 rounded-3xl p-2 absolute right-10"
+                        >
+                            <Text className="text-white font-semibold">Clear</Text>
+
+                        </TouchableOpacity>
+                    )
+                }
+                
+                {
+                    speaking && (
+                        <TouchableOpacity
+                            onPress={stop}
+                            className="bg-red-400 rounded-3xl p-2 absolute left-10"
+                        >
+                            <Text className="text-white font-semibold">Stop</Text>
+
+                        </TouchableOpacity>
+                    )
+                }
+                
+            </View>
         </SafeAreaView>
     </View>
   )
